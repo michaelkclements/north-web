@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import { useStaticQuery, graphql } from "gatsby";
 import { Logo, Button } from "../components";
 
 const Main = styled.main`
@@ -33,6 +34,16 @@ const Vidja = styled.video`
 
 // markup
 const IndexPage = () => {
+  const data = useStaticQuery(graphql`
+    {
+      contentfulAsset(contentful_id: { eq: "4D5zQ1GTzkjHVqIguGEk5n" }) {
+        file {
+          url
+        }
+      }
+    }
+  `);
+
   return (
     <Main>
       <Content>
@@ -42,7 +53,7 @@ const IndexPage = () => {
           <Button onClick={() => console.log("contact")}>Contact me</Button>
         </Buttons>
       </Content>
-      <Vidja autoPlay muted loop src="/static/reel.mp4" />
+      <Vidja autoPlay muted loop src={data.contentfulAsset.file.url} />
     </Main>
   );
 };
