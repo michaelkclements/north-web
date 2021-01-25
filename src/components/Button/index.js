@@ -6,6 +6,7 @@ const Button = styled.button`
   border-radius: 3px;
   border: 2px solid #fff;
   color: #fff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 24px;
   padding: 10px 20px;
   margin: 10px;

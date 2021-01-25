@@ -4,7 +4,9 @@ import styled from "styled-components";
 const Logo = styled.div`
   color: #fff;
   display: flex;
+  font-family: Porter;
   font-size: 120px;
+  font-weight: bold;
   margin: 0;
 
   div {
@@ -13,7 +15,8 @@ const Logo = styled.div`
 
     span {
       font-size: 100px;
-      letter-spacing: ${(props) => (props.isActive ? "0" : "-40px")};
+      font-weight: normal;
+      letter-spacing: ${(props) => (props.isActive ? "0" : "-80px")};
       opacity: ${(props) => (props.isActive ? "1" : "0")};
       transition: all 500ms ease 500ms;
     }
