@@ -38,20 +38,41 @@ const Button = styled.input`
   margin: 10px 0;
 `;
 
-export default () => (
-  <Form
-    name="contact_george"
-    method="post"
-    data-netlify="true"
-    data-netlify-honeypot="bot-field"
-  >
-    <input type="hidden" name="bot-field" />
-    <Input placeholder="Your name" type="text" name="name" id="name" />
-    <Input placeholder="Your email" type="text" name="email" id="email" />
-    <Textarea placeholder="Your message" name="message" id="message" rows="6" />
-    <Buttons>
-      <Button type="submit" value="Send Message" className="special" />
-      <Button type="reset" value="Clear" />
-    </Buttons>
-  </Form>
-);
+export default () => {
+  function encode(data) {
+    return Object.keys(data)
+      .map(
+        (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+      )
+      .join("&");
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": event.target.getAttribute("name"),
+      }),
+    })
+      .then(() => console.log("submitted"))
+      .catch((error) => alert(error));
+  };
+
+  return (
+    <Form
+      data-netlify="true"
+      name="contactGeorge"
+      method="post"
+      onSubmit={handleSubmit}
+    >
+      <input type="hidden" name="form-name" value="contactGeorge" />
+      <Input placeholder="Your name" name="name" type="text" />
+      <Textarea placeholder="Your message" name="message" type="text" />
+      <Buttons>
+        <Button type="submit" />
+      </Buttons>
+    </Form>
+  );
+};
