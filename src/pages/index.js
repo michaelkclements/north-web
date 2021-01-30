@@ -44,6 +44,9 @@ const IndexPage = () => {
           url
         }
       }
+      contentfulPage(id: { eq: "9dd16838-0fa9-556b-878a-718fb249965a" }) {
+        vimeoUrl
+      }
     }
   `);
 
@@ -66,7 +69,7 @@ const IndexPage = () => {
         {isVideoActive && (
           <iframe
             title="vimeo-player"
-            src="https://player.vimeo.com/video/147170777"
+            src={data.contentfulPage.vimeoUrl}
             width="640"
             height="360"
             frameBorder="0"

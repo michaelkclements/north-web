@@ -1,4 +1,5 @@
 import React from "react";
+import { useStaticQuery } from "gatsby";
 import { Helmet } from "react-helmet";
 import styled, { createGlobalStyle } from "styled-components";
 
@@ -39,10 +40,20 @@ const Container = styled.div`
   flex: 1;
 `;
 
-export default ({ children }) => (
-  <>
-    <Helmet />
-    <GlobalStyle />
-    <Container>{children}</Container>
-  </>
-);
+export default ({ children }) => {
+  const data = useStaticQuery(graphql`
+    {
+      contentfulPage(id: { eq: "9dd16838-0fa9-556b-878a-718fb249965a" }) {
+        title
+      }
+    }
+  `);
+
+  return (
+    <>
+      <Helmet title={data.contentfulPage.title} />
+      <GlobalStyle />
+      <Container>{children}</Container>
+    </>
+  );
+};

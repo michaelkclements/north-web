@@ -12,6 +12,7 @@ const Modal = styled.div`
   position: fixed;
   right: 0;
   top: 0;
+  transition: all 300ms ease;
 `;
 
 const Overlay = styled.div`
@@ -20,6 +21,7 @@ const Overlay = styled.div`
   content: "";
   height: 100%;
   position: absolute;
+  transition: all 300ms ease;
   width: 100%;
   z-index: -1;
 `;

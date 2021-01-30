@@ -54,6 +54,7 @@ export default ({ submitted }) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": event.target.getAttribute("name"),
+        "form-message": event.target.getAttribute("message"),
       }),
     })
       .then(() => submitted())
@@ -63,7 +64,7 @@ export default ({ submitted }) => {
   return (
     <Form
       data-netlify="true"
-      name="contactGeorge"
+      name="contact-george"
       method="post"
       onSubmit={handleSubmit}
     >
