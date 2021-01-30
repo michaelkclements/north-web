@@ -38,7 +38,7 @@ const Button = styled.input`
   margin: 10px 0;
 `;
 
-export default () => {
+export default ({ submitted }) => {
   function encode(data) {
     return Object.keys(data)
       .map(
@@ -56,7 +56,7 @@ export default () => {
         "form-name": event.target.getAttribute("name"),
       }),
     })
-      .then(() => console.log("submitted"))
+      .then(() => submitted())
       .catch((error) => alert(error));
   };
 

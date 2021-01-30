@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
-import { Logo, Button, Form } from "../components";
+import { Logo, Button, Form, Modal } from "../components";
 
 const Main = styled.main`
   align-items: center;
@@ -32,29 +32,6 @@ const Vidja = styled.video`
   z-index: -1;
 `;
 
-const Modal = styled.div`
-  align-items: center;
-  pointer-events: ${(props) => (props.isActive ? "all" : "none")};
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  left: 0;
-  opacity: ${(props) => (props.isActive ? 1 : 0)};
-  position: fixed;
-  right: 0;
-  top: 0;
-
-  &::before {
-    backdrop-filter: blur(5px);
-    background-color: rgba(0, 0, 0, 0.3);
-    content: "";
-    height: 100%;
-    position: absolute;
-    width: 100%;
-    z-index: -1;
-  }
-`;
-
 // markup
 const IndexPage = () => {
   const [isFormActive, setFormActive] = useState(false);
@@ -79,9 +56,29 @@ const IndexPage = () => {
           <Button onClick={() => setFormActive(true)}>Contact me</Button>
         </Buttons>
       </Content>
-      <Modal isActive={isFormActive || isVideoActive}>
-        {isVideoActive}
-        <Form isActive={isFormActive} />
+      <Modal
+        isActive={isFormActive || isVideoActive}
+        setActive={() => {
+          setFormActive(false);
+          setVideoActive(false);
+        }}
+      >
+        {isVideoActive && (
+          <iframe
+            title="vimeo-player"
+            src="https://player.vimeo.com/video/147170777"
+            width="640"
+            height="360"
+            frameBorder="0"
+            allowfullscreen
+          />
+        )}
+        {isFormActive && (
+          <Form
+            isActive={isFormActive}
+            submitted={() => setFormActive(false)}
+          />
+        )}
       </Modal>
       <Vidja autoPlay muted loop src={data.contentfulAsset.file.url} />
     </Main>
