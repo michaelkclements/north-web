@@ -71,14 +71,14 @@ export default ({ submitted }) => {
 
   return (
     <Form
-      name="contact-george"
+      name="contact"
       method="post"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
       ref={contactForm}
       onSubmit={handleSubmit}
     >
-      <input type="hidden" name="form-name" value="contact-george" />
+      <input type="hidden" name="form-name" value="contact" />
       <Input
         placeholder="Your name"
         name="name"
