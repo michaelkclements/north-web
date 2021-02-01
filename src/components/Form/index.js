@@ -54,7 +54,8 @@ export default ({ submitted }) => {
   };
 
   const handleSubmit = (e) => {
-    const form = this.ContactForm.current;
+    e.preventDefault();
+    const form = contactForm.current;
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -64,8 +65,6 @@ export default ({ submitted }) => {
         submitted();
       })
       .catch((error) => alert(error));
-
-    e.preventDefault();
   };
 
   const contactForm = React.createRef();
