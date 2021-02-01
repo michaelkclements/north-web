@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Form = styled.form`
@@ -39,27 +39,35 @@ const Button = styled.input`
 `;
 
 export default ({ submitted }) => {
-  function encode(data) {
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const encode = (data) => {
     return Object.keys(data)
       .map(
         (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
       )
       .join("&");
-  }
+  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": event.target.getAttribute("name"),
-        "form-message": event.target.getAttribute("message"),
-      }),
+      body: encode({ "form-name": "contact-george", ...formState }),
     })
-      .then(() => submitted())
+      .then(() => {
+        submitted();
+      })
       .catch((error) => alert(error));
+
+    e.preventDefault();
   };
+
+  const handleChange = (e) => setFormState({ [e.target.name]: e.target.value });
 
   return (
     <Form
@@ -68,9 +76,23 @@ export default ({ submitted }) => {
       method="post"
       onSubmit={handleSubmit}
     >
-      <input type="hidden" name="form-name" value="contactGeorge" />
-      <Input placeholder="Your name" name="name" type="text" />
-      <Textarea placeholder="Your message" name="message" type="text" />
+      <Input
+        placeholder="Your name"
+        name="name"
+        type="text"
+        onChange={handleChange}
+      />
+      <Input
+        placeholder="Your email"
+        name="email"
+        type="email"
+        onChange={handleChange}
+      />
+      <Textarea
+        placeholder="Your message"
+        name="message"
+        onChange={handleChange}
+      />
       <Buttons>
         <Button type="submit" />
       </Buttons>
