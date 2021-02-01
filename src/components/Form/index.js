@@ -70,27 +70,25 @@ export default ({ submitted }) => {
   const handleChange = (e) => setFormState({ [e.target.name]: e.target.value });
 
   return (
-    <Form
-      data-netlify="true"
-      name="contact-george"
-      method="post"
-      onSubmit={handleSubmit}
-    >
+    <Form data-netlify="true" onSubmit={handleSubmit}>
       <Input
         placeholder="Your name"
         name="name"
         type="text"
+        value={formState.name}
         onChange={handleChange}
       />
       <Input
         placeholder="Your email"
         name="email"
         type="email"
+        value={formState.email}
         onChange={handleChange}
       />
       <Textarea
         placeholder="Your message"
         name="message"
+        value={formState.message}
         onChange={handleChange}
       />
       <Buttons>
