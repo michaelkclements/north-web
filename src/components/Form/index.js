@@ -54,10 +54,11 @@ export default ({ submitted }) => {
   };
 
   const handleSubmit = (e) => {
+    const form = this.ContactForm.current;
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact-george", ...formState }),
+      body: encode({ "form-name": form.getAttribute("name"), ...formState }),
     })
       .then(() => {
         submitted();
@@ -67,29 +68,55 @@ export default ({ submitted }) => {
     e.preventDefault();
   };
 
-  const handleChange = (e) => setFormState({ [e.target.name]: e.target.value });
+  const contactForm = React.createRef();
 
   return (
-    <Form data-netlify="true" onSubmit={handleSubmit}>
+    <Form
+      name="contact-george"
+      method="post"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      ref={contactForm}
+      onSubmit={handleSubmit}
+    >
+      <input type="hidden" name="form-name" value="contact-george" />
       <Input
         placeholder="Your name"
         name="name"
         type="text"
         value={formState.name}
-        onChange={handleChange}
+        onChange={(e) =>
+          setFormState({
+            name: e.target.value,
+            email: formState.email,
+            message: formState.message,
+          })
+        }
       />
       <Input
         placeholder="Your email"
         name="email"
         type="email"
         value={formState.email}
-        onChange={handleChange}
+        onChange={(e) =>
+          setFormState({
+            name: formState.name,
+            email: e.target.value,
+            message: formState.message,
+          })
+        }
       />
       <Textarea
         placeholder="Your message"
         name="message"
         value={formState.message}
-        onChange={handleChange}
+        onChange={(e) =>
+          setFormState({
+            name: formState.name,
+            email: formState.email,
+            message: e.target.value,
+          })
+        }
       />
       <Buttons>
         <Button type="submit" />
