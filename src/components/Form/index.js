@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const Form = styled.form`
+const Form = styled.div`
   width: 400px;
 `;
 
@@ -70,56 +70,58 @@ export default ({ submitted }) => {
   const contactForm = React.createRef();
 
   return (
-    <Form
-      name="contact"
-      method="post"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      ref={contactForm}
-      onSubmit={handleSubmit}
-    >
-      <input type="hidden" name="form-name" value="contact" />
-      <Input
-        placeholder="Your name"
-        name="name"
-        type="text"
-        value={formState.name}
-        onChange={(e) =>
-          setFormState({
-            name: e.target.value,
-            email: formState.email,
-            message: formState.message,
-          })
-        }
-      />
-      <Input
-        placeholder="Your email"
-        name="email"
-        type="email"
-        value={formState.email}
-        onChange={(e) =>
-          setFormState({
-            name: formState.name,
-            email: e.target.value,
-            message: formState.message,
-          })
-        }
-      />
-      <Textarea
-        placeholder="Your message"
-        name="message"
-        value={formState.message}
-        onChange={(e) =>
-          setFormState({
-            name: formState.name,
-            email: formState.email,
-            message: e.target.value,
-          })
-        }
-      />
-      <Buttons>
-        <Button type="submit" />
-      </Buttons>
+    <Form>
+      <form
+        name="contact"
+        method="post"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        ref={contactForm}
+        onSubmit={handleSubmit}
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <Input
+          placeholder="Your name"
+          name="name"
+          type="text"
+          value={formState.name}
+          onChange={(e) =>
+            setFormState({
+              name: e.target.value,
+              email: formState.email,
+              message: formState.message,
+            })
+          }
+        />
+        <Input
+          placeholder="Your email"
+          name="email"
+          type="email"
+          value={formState.email}
+          onChange={(e) =>
+            setFormState({
+              name: formState.name,
+              email: e.target.value,
+              message: formState.message,
+            })
+          }
+        />
+        <Textarea
+          placeholder="Your message"
+          name="message"
+          value={formState.message}
+          onChange={(e) =>
+            setFormState({
+              name: formState.name,
+              email: formState.email,
+              message: e.target.value,
+            })
+          }
+        />
+        <Buttons>
+          <Button type="submit" />
+        </Buttons>
+      </form>
     </Form>
   );
 };
