@@ -61,7 +61,8 @@ export default ({ submitted }) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": form.getAttribute("name"), ...formState }),
     })
-      .then(() => {
+      .then((response) => {
+        console.log(response);
         submitted();
       })
       .catch((error) => alert(error));
