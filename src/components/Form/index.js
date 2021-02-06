@@ -57,7 +57,7 @@ export default ({ submitted }) => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "georgeContact", ...formState }),
+      body: encode({ "form-name": "contact", ...formState }),
     })
       .then((response) => {
         console.log(response);
@@ -70,13 +70,14 @@ export default ({ submitted }) => {
   return (
     <Form>
       <form
-        name="georgeContact"
+        name="contact"
         method="post"
+        netlify-honeypot="bot-field"
         data-netlify="true"
-        data-netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
       >
-        <input type="hidden" name="form-name" value="georgeContact" />
+        <input type="hidden" name="bot-field" />
+        <input type="hidden" name="form-name" value="contact" />
         <Input
           placeholder="Your name"
           name="name"
