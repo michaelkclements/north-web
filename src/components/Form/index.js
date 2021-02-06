@@ -54,33 +54,29 @@ export default ({ submitted }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = contactForm.current;
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": form.getAttribute("name"), ...formState }),
+      body: encode({ "form-name": "georgeContact", ...formState }),
     })
       .then((response) => {
         console.log(response);
         submitted();
       })
       .catch((error) => alert(error));
+    e.preventDefault();
   };
-
-  const contactForm = React.createRef();
 
   return (
     <Form>
       <form
-        name="contact"
+        name="georgeContact"
         method="post"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
-        ref={contactForm}
         onSubmit={handleSubmit}
       >
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="form-name" value="georgeContact" />
         <Input
           placeholder="Your name"
           name="name"
