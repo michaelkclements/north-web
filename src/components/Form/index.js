@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import styled from "styled-components";
 
 const Form = styled.div`
@@ -38,12 +38,21 @@ const Button = styled.input`
   margin: 10px 0;
 `;
 
+const initialState = {
+  name: "",
+  email: "",
+  message: "",
+};
+
+function reducer(state, { field, value }) {
+  return {
+    ...state,
+    [field]: value,
+  };
+}
+
 export default ({ submitted }) => {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const encode = (data) => {
     return Object.keys(data)
@@ -53,18 +62,24 @@ export default ({ submitted }) => {
       .join("&");
   };
 
+  const handleChange = (e) => {
+    dispatch({ field: e.target.name, value: e.target.value });
+  };
+
   const handleSubmit = (e) => {
+    e.preventDefault();
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "north-contact", ...formState }),
+      body: encode({ "form-name": "north-contact", ...state }),
     })
       .then(() => {
         submitted();
       })
       .catch((error) => alert(error));
-    e.preventDefault();
   };
+
+  const { name, email, message } = state;
 
   return (
     <Form>
@@ -80,38 +95,21 @@ export default ({ submitted }) => {
           placeholder="Your name"
           name="name"
           type="text"
-          onChange={(e) =>
-            setFormState({
-              name: e.target.value,
-              email: formState.email,
-              message: formState.message,
-            })
-          }
+          value={name}
+          onChange={handleChange}
         />
         <Input
           placeholder="Your email"
           name="email"
           type="email"
-          value={formState.email}
-          onChange={(e) =>
-            setFormState({
-              name: formState.name,
-              email: e.target.value,
-              message: formState.message,
-            })
-          }
+          value={email}
+          onChange={handleChange}
         />
         <Textarea
           placeholder="Your message"
           name="message"
-          value={formState.message}
-          onChange={(e) =>
-            setFormState({
-              name: formState.name,
-              email: formState.email,
-              message: e.target.value,
-            })
-          }
+          value={message}
+          onChange={handleChange}
         />
         <Buttons>
           <Button type="submit" />
