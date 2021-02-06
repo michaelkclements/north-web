@@ -79,6 +79,7 @@ export default ({ submitted }) => {
         action="/?success=true"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
+        netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
       >
         <input type="hidden" name="form-name" value="north_contact" />
@@ -86,6 +87,7 @@ export default ({ submitted }) => {
           placeholder="Your name"
           name="name"
           type="text"
+          id="name"
           value={name}
           onChange={handleChange}
         />
@@ -93,12 +95,14 @@ export default ({ submitted }) => {
           placeholder="Your email"
           name="email"
           type="email"
+          id="email"
           value={email}
           onChange={handleChange}
         />
         <Textarea
           placeholder="Your message"
           name="message"
+          id="message"
           value={message}
           onChange={handleChange}
         />
