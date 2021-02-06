@@ -38,21 +38,11 @@ const Button = styled.input`
   margin: 10px 0;
 `;
 
-const initialState = {
-  name: "",
-  email: "",
-  message: "",
-};
-
-function reducer(state, { field, value }) {
-  return {
-    ...state,
-    [field]: value,
-  };
-}
-
 export default ({ submitted }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, updateState] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    { name: "", email: "", message: "" }
+  );
 
   const encode = (data) => {
     return Object.keys(data)
@@ -63,17 +53,21 @@ export default ({ submitted }) => {
   };
 
   const handleChange = (e) => {
-    dispatch({ field: e.target.name, value: e.target.value });
+    updateState({ [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(encode({ "form-name": "north_contact", ...state }));
+    console.log(state);
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "north-contact", ...state }),
+      body: encode({ "form-name": "north_contact", ...state }),
     })
-      .then(() => {
+      .then((response) => {
+        console.log(response);
+        console.log("success");
         submitted();
       })
       .catch((error) => alert(error));
@@ -84,13 +78,13 @@ export default ({ submitted }) => {
   return (
     <Form>
       <form
-        name="north-contact"
+        name="north_contact"
         method="post"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
       >
-        <input type="hidden" name="form-name" value="north-contact" />
+        <input type="hidden" name="form-name" value="north_contact" />
         <Input
           placeholder="Your name"
           name="name"
