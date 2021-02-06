@@ -58,16 +58,12 @@ export default ({ submitted }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(encode({ "form-name": "north_contact", ...state }));
-    console.log(state);
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "north_contact", ...state }),
     })
-      .then((response) => {
-        console.log(response);
-        console.log("success");
+      .then(() => {
         submitted();
       })
       .catch((error) => alert(error));
