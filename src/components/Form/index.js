@@ -76,6 +76,7 @@ export default ({ submitted }) => {
       <form
         name="north_contact"
         method="post"
+        action="/?success=true"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
