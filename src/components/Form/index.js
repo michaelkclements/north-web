@@ -61,7 +61,7 @@ export default ({ submitted }) => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "north_contact", ...state }),
+      body: encode({ "form-name": "contactGeorge", ...state }),
     })
       .then(() => {
         submitted();
@@ -69,41 +69,30 @@ export default ({ submitted }) => {
       .catch((error) => alert(error));
   };
 
-  const { name, email, message } = state;
-
   return (
     <Form>
       <form
-        name="north_contact"
+        name="contactGeorge"
         method="post"
-        action="/?success=true"
         data-netlify="true"
-        data-netlify-honeypot="bot-field"
-        netlify-honeypot="bot-field"
         onSubmit={handleSubmit}
       >
-        <input type="hidden" name="form-name" value="north_contact" />
+        <input type="hidden" name="form-name" value="contactGeorge" />
         <Input
           placeholder="Your name"
           name="name"
           type="text"
-          id="name"
-          value={name}
           onChange={handleChange}
         />
         <Input
           placeholder="Your email"
           name="email"
           type="email"
-          id="email"
-          value={email}
           onChange={handleChange}
         />
         <Textarea
           placeholder="Your message"
           name="message"
-          id="message"
-          value={message}
           onChange={handleChange}
         />
         <Buttons>
