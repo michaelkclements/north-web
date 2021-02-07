@@ -32,6 +32,7 @@ const Button = styled.input`
   border-radius: 3px;
   border: 2px solid #fff;
   color: #fff;
+  cursor: pointer;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 24px;
   padding: 10px 20px;
