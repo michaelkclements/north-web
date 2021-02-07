@@ -39,13 +39,13 @@ const IndexPage = () => {
 
   const data = useStaticQuery(graphql`
     {
-      contentfulAsset(contentful_id: { eq: "4D5zQ1GTzkjHVqIguGEk5n" }) {
-        file {
-          url
-        }
-      }
       contentfulPage(id: { eq: "9dd16838-0fa9-556b-878a-718fb249965a" }) {
         vimeoUrl
+        backgroundVid {
+          file {
+            url
+          }
+        }
       }
     }
   `);
@@ -83,7 +83,12 @@ const IndexPage = () => {
           />
         )}
       </Modal>
-      <Vidja autoPlay muted loop src={data.contentfulAsset.file.url} />
+      <Vidja
+        autoPlay
+        muted
+        loop
+        src={data.contentfulPage.backgroundVid.file.url}
+      />
     </Main>
   );
 };
