@@ -61,7 +61,7 @@ export default ({ submitted }) => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact_george", ...state }),
+      body: encode({ "form-name": "contact", ...state }),
     })
       .then(() => {
         submitted();
@@ -72,12 +72,12 @@ export default ({ submitted }) => {
   return (
     <Form>
       <form
-        name="contact_george"
+        name="contact"
         method="post"
         data-netlify="true"
         onSubmit={handleSubmit}
       >
-        <input type="hidden" name="form-name" value="contact_george" />
+        <input type="hidden" name="form-name" value="contact" />
         <Input
           placeholder="Your name"
           name="name"
