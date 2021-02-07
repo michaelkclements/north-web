@@ -55,8 +55,8 @@ export default ({ submitted }) => {
   const handleChange = (e) => {
     updateState({ [e.target.name]: e.target.value });
 
-    if (e.target.name === "name") {
-      updateState({ [e.target.name]: `${state.email} ${e.target.value}` });
+    if (e.target.name === "email") {
+      updateState({ name: `${state.email} ${state.name}` });
     }
   };
 
