@@ -54,6 +54,10 @@ export default ({ submitted }) => {
 
   const handleChange = (e) => {
     updateState({ [e.target.name]: e.target.value });
+
+    if ([e.target.name] === "name") {
+      updateState({ [e.target.name]: `${state.email} ${e.target.value}` });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -61,7 +65,7 @@ export default ({ submitted }) => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...state }),
+      body: encode({ "form-name": "contactGeorge", ...state }),
     })
       .then(() => {
         submitted();
@@ -72,12 +76,12 @@ export default ({ submitted }) => {
   return (
     <Form>
       <form
-        name="contact"
+        name="contactGeorge"
         method="post"
         data-netlify="true"
         onSubmit={handleSubmit}
       >
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="form-name" value="contactGeorge" />
         <Input
           placeholder="Your name"
           name="name"
