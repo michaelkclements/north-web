@@ -25,7 +25,14 @@ const Content = styled.div`
 
 const Buttons = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  margin-top: 40px;
+
+  @media (min-width: 960px) {
+    flex-direction: row;
+    margin: 0;
+  }
 `;
 
 const Vidja = styled.video`

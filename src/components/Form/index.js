@@ -2,10 +2,17 @@ import React, { useReducer } from "react";
 import styled from "styled-components";
 
 const Form = styled.div`
-  width: 400px;
+  padding: 10px;
+  width: 100%;
+
+  @media (min-width: 960px) {
+    width: 400px;
+  }
 `;
 
 const Input = styled.input`
+  border: 0;
+  border-radius: 3px;
   box-sizing: border-box;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 20px;
@@ -15,16 +22,19 @@ const Input = styled.input`
 `;
 
 const Textarea = styled.textarea`
+  border: 0;
+  border-radius: 3px;
   box-sizing: border-box;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 20px;
+  margin: 10px 0;
   padding: 20px;
   width: 100%;
 `;
 
 const Buttons = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 const Button = styled.input`
