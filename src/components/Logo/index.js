@@ -5,7 +5,7 @@ const Logo = styled.div`
   color: #fff;
   display: flex;
   font-family: Porter;
-  font-size: 120px;
+  font-size: 40px;
   font-weight: bold;
   margin: 0;
 
@@ -14,11 +14,22 @@ const Logo = styled.div`
     transition: all 500ms ease 500ms;
 
     span {
-      font-size: 100px;
+      font-size: 30px;
       font-weight: normal;
-      letter-spacing: ${(props) => (props.isActive ? "0" : "-80px")};
+      letter-spacing: ${(props) => (props.isActive ? "0" : "-20px")};
       opacity: ${(props) => (props.isActive ? "1" : "0")};
       transition: all 500ms ease 500ms;
+    }
+  }
+
+  @media (min-width: 960px) {
+    font-size: 120px;
+
+    div {
+      span {
+        font-size: 100px;
+        letter-spacing: ${(props) => (props.isActive ? "0" : "-80px")};
+      }
     }
   }
 `;

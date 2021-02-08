@@ -17,7 +17,10 @@ const Content = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 600px;
+
+  @media (min-width: 960px) {
+    width: 600px;
+  }
 `;
 
 const Buttons = styled.div`

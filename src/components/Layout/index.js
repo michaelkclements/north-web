@@ -38,6 +38,7 @@ const Container = styled.div`
   background-color: #202020;
   display: flex;
   flex: 1;
+  overflow: hidden;
 `;
 
 export default ({ children }) => {
