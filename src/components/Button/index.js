@@ -8,9 +8,13 @@ const Button = styled.button`
   color: #fff;
   cursor: pointer;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  font-size: 24px;
+  font-size: 20px;
   padding: 10px 20px;
   margin: 10px;
+
+  @media (min-width: 960px) {
+    font-size: 24px;
+  }
 `;
 
 export default ({ children, onClick }) => (
